@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<h:head />
+	<h:form enctype="multipart/form-data">
+		<div>
+			<h:outputLabel value="Title" />
+			<h:inputText id="title" value="#{bookAdminBean.book.title}" required="true"/>
+			<h:message for="title"/>
+		</div>
+		
+		<div>
+			<h:outputLabel value="Description" />
+			<h:inputTextarea id="description" rows="4" cols="20" value="#{bookAdminBean.book.description}" required="true"/>
+			<h:message for="description"/>
+		</div>
+		
+		<div>
+			<h:outputLabel value="Number of pages" />
+			<h:inputText id="numPages" value="#{bookAdminBean.book.numberPages}" required="true"/>
+			<h:message for="numPages"/>
+		</div>
+		
+		<div>
+			<h:outputLabel value="Price" />
+			<h:inputText id="price" value="#{bookAdminBean.book.price}" required="true" />
+			<h:message for="price"/>
+		</div>
+		
+		<div>
+			<h:outputLabel value="Publication Date"/>
+			<h:inputText id="date" value="#{bookAdminBean.book.publicationDate}" />
+			<h:message for="date"/>
+		</div>
+		
+		<div>
+			<h:outputLabel value="Authors"/>
+			<h:selectManyListbox id="authors" value="#{bookAdminBean.book.authors}" converter="authorConverter">
+				<f:selectItems value="#{bookAdminBean.authors}" var="author" itemValue="#{author}" itemLabel="#{author.name}"/>
+			</h:selectManyListbox>
+			<h:message for="authors"/>
+		</div>
+		
+		<div>
+			<h:outputLabel value="book cover"/>
+			<h:inputFile id="bookCover" value="#{bookAdminBean.bookCover}"/>
+			<h:message for="bookCover" />
+		</div>
+		
+		<h:commandButton value="Submit" action="#{bookAdminBean.save}"/>
+	</h:form>
+	<h:form>
+			<h:commandButton value="New Author" action="#{bookAdminBean.newAuthor}"/>
+	</h:form>
+</html>
