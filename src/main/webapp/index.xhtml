@@ -214,9 +214,9 @@
 	<h2 class="vitrineDestaquinho-titulo">Last Releases</h2>
 	<ul class="vitrineDestaquinho-lista">
 
-		<ui:repeat var="#{homeBean.lastReleases()}" value="book">
+		<ui:repeat value="#{homeBean.lastReleases()}" var="book">
 			<li class="livroNaVitrine vitrineDestaquinho-produto">
-				<a href="{request.contextPath}/livro-detalhe.xhtml?id=#{book.id}" class="livroNaVitrine-link"
+				<a href="#{request.contextPath}/detalhe-livro.xhtml?id=#{book.id}" class="livroNaVitrine-link"
 						title="#{book.title}">
 					<div class="livroNaVitrine-imagemContainer" role="presentation">
 						<img class="livroNaVitrine-imagem" 
@@ -238,7 +238,7 @@
 	
 		<ui:repeat var="book" value="#{homeBean.moreBooks()}">
 			<li class="livroNaVitrine vitrineDaColecao-produto">
-				<a href="{request.contextPath}/livro-detalhe.xhtml?id=#{book.id}" class="livroNaVitrine-link" 
+				<a href="#{request.contextPath}/detalhe-livro.xhtml?id=#{book.id}" class="livroNaVitrine-link" 
 					title="#{book.title}">
 					<div class="livroNaVitrine-imagemContainer" role="presentation">
 						<img class="livroNaVitrine-imagem" src="#{request.contextPath}/file/#{book.coverPath}" 

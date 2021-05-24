@@ -2,14 +2,17 @@ package br.com.alura.bookstore.daos;
 
 import java.util.List;
 
+import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 import br.com.alura.bookstore.model.Book;
 
+@Stateful
 public class BookDao {
 	
-	@PersistenceContext
+	@PersistenceContext(type=PersistenceContextType.EXTENDED)
 	private EntityManager em;
 	
 	public void save(Book book) {
@@ -32,12 +35,15 @@ public class BookDao {
 	public List<Book> moreBooks() {
 		String jpql = "SELECT b FROM Book b ORDER BY b.id DESC";
 		return em.createQuery(jpql, Book.class)
-				.setFirstResult(6 )
+				.setFirstResult(5)
 				.getResultList();
 	}
 
 	public Book findById(Integer id) {
-		return em.find(Book.class, id);
+		// return em.find(Book.class, id);
+		String jpql = "SELECT b FROM Book b JOIN FETCH b.authors "
+			+ "WHERE b.id = :id";
+		return em.createQuery(jpql, Book.class).setParameter("id", id).getSingleResult();
 	}
 
 }

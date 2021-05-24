@@ -5,7 +5,6 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-	<h:head />
 	<h:form enctype="multipart/form-data">
 		<div>
 			<h:outputLabel value="Title" />
@@ -48,7 +47,7 @@
 		<div>
 			<h:outputLabel value="book cover"/>
 			<h:inputFile id="bookCover" value="#{bookAdminBean.bookCover}"/>
-			<h:message for="bookCover" />
+			<h:message for="bookCover"/>
 		</div>
 		
 		<h:commandButton value="Submit" action="#{bookAdminBean.save}"/>
