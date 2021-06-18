@@ -3,9 +3,12 @@ package br.com.alura.bookstore.daos;
 import java.util.List;
 
 import javax.ejb.Stateful;
+import javax.persistence.Cache;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+
+import org.hibernate.jpa.QueryHints;
 
 import br.com.alura.bookstore.model.Book;
 
@@ -19,6 +22,11 @@ public class BookDao {
 		em.persist(book);
 	}
 
+	public void clearCache() {
+		Cache cache = em.getEntityManagerFactory().getCache();
+		cache.evict(Book.class);
+	}
+	
 	public List<Book> listAll() {
 		String jpql = "SELECT DISTINCT(b) FROM Book b "
 				+ "JOIN FETCH b.authors";
@@ -29,6 +37,7 @@ public class BookDao {
 		String jpql = "SELECT b FROM Book b ORDER BY b.id DESC";
 		return em.createQuery(jpql, Book.class)
 				.setMaxResults(5)
+				.setHint(QueryHints.HINT_CACHEABLE, true)
 				.getResultList();
 	}
 
@@ -36,6 +45,7 @@ public class BookDao {
 		String jpql = "SELECT b FROM Book b ORDER BY b.id DESC";
 		return em.createQuery(jpql, Book.class)
 				.setFirstResult(5)
+				.setHint(QueryHints.HINT_CACHEABLE, true)
 				.getResultList();
 	}
 

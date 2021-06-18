@@ -5,54 +5,99 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-	<h:form enctype="multipart/form-data">
-		<div>
-			<h:outputLabel value="Title" />
-			<h:inputText id="title" value="#{bookAdminBean.book.title}" required="true"/>
-			<h:message for="title"/>
+
+<h:head>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet library="css" name="style-admin.css" />
+</h:head>
+
+
+<h:body>
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="#">Book Store</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+			data-bs-target="#navbarCollapse" aria-controls="navbarCollapse"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav me-auto mb-2 mb-md-0">
+				<li class="nav-item"><h:link class="nav-link" aria-current="page" value="Home" outcome="index.xhtml"/></li>
+				<li class="nav-item"><h:link class="nav-link" value="List" outcome="list"/></li>
+				<li class="nav-item"><a class="nav-link active" href="#"
+					tabindex="-1" aria-disabled="true">Register</a></li>
+			</ul>
 		</div>
-		
-		<div>
-			<h:outputLabel value="Description" />
-			<h:inputTextarea id="description" rows="4" cols="20" value="#{bookAdminBean.book.description}" required="true"/>
-			<h:message for="description"/>
-		</div>
-		
-		<div>
-			<h:outputLabel value="Number of pages" />
-			<h:inputText id="numPages" value="#{bookAdminBean.book.numberPages}" required="true"/>
-			<h:message for="numPages"/>
-		</div>
-		
-		<div>
-			<h:outputLabel value="Price" />
-			<h:inputText id="price" value="#{bookAdminBean.book.price}" required="true" />
-			<h:message for="price"/>
-		</div>
-		
-		<div>
-			<h:outputLabel value="Publication Date"/>
-			<h:inputText id="date" value="#{bookAdminBean.book.publicationDate}" />
-			<h:message for="date"/>
-		</div>
-		
-		<div>
-			<h:outputLabel value="Authors"/>
-			<h:selectManyListbox id="authors" value="#{bookAdminBean.book.authors}" converter="authorConverter">
-				<f:selectItems value="#{bookAdminBean.authors}" var="author" itemValue="#{author}" itemLabel="#{author.name}"/>
-			</h:selectManyListbox>
-			<h:message for="authors"/>
-		</div>
-		
-		<div>
-			<h:outputLabel value="book cover"/>
-			<h:inputFile id="bookCover" value="#{bookAdminBean.bookCover}"/>
-			<h:message for="bookCover"/>
-		</div>
-		
-		<h:commandButton value="Submit" action="#{bookAdminBean.save}"/>
-	</h:form>
-	<h:form>
-			<h:commandButton value="New Author" action="#{bookAdminBean.newAuthor}"/>
-	</h:form>
+	</div>
+	</nav>
+
+	<div class="container">
+		<h1>Register of Books</h1>
+		<h:form enctype="multipart/form-data">
+			<div class="form-group">
+				<h:outputLabel value="Title" />
+				<h:inputText id="title" value="#{bookAdminBean.book.title}"
+					required="true" styleClass="form-control" />
+				<h:message for="title" />
+			</div>
+
+			<div class="form-group">
+				<h:outputLabel value="Description" />
+				<h:inputTextarea id="description" rows="4" cols="20"
+					value="#{bookAdminBean.book.description}" required="true"
+					styleClass="form-control" />
+				<h:message for="description" />
+			</div>
+
+			<div class="form-group">
+				<h:outputLabel value="Number of pages" />
+				<h:inputText id="numPages" value="#{bookAdminBean.book.numberPages}"
+					required="true" styleClass="form-control" />
+				<h:message for="numPages" />
+			</div>
+
+			<div class="form-group">
+				<h:outputLabel value="Price" />
+				<h:inputText id="price" value="#{bookAdminBean.book.price}"
+					required="true" styleClass="form-control" />
+				<h:message for="price" />
+			</div>
+
+			<div class="form-group">
+				<h:outputLabel value="Publication Date" />
+				<h:inputText id="date" value="#{bookAdminBean.book.publicationDate}"
+					styleClass="form-control" />
+				<h:message for="date" />
+			</div>
+
+			<div class="form-group">
+				<h:outputLabel value="Authors" />
+				<h:selectManyListbox id="authors"
+					value="#{bookAdminBean.book.authors}" converter="authorConverter"
+					styleClass="form-control">
+					<f:selectItems value="#{bookAdminBean.authors}" var="author"
+						itemValue="#{author}" itemLabel="#{author.name}" />
+				</h:selectManyListbox>
+				<h:message for="authors" />
+			</div>
+
+			<div class="mb-3">
+				<h:outputLabel value="Book Cover" />
+				<h:inputFile id="bookCover" value="#{bookAdminBean.bookCover}"
+					styleClass="form-control" />
+				<h:message for="bookCover" />
+			</div>
+
+			<h:commandButton value="Submit" action="#{bookAdminBean.save}"
+				styleClass="btn-primary" />
+		</h:form>
+		<h:form>
+			<h:commandButton value="New Author"
+				action="#{bookAdminBean.newAuthor}" />
+		</h:form>
+	</div>
+
+</h:body>
 </html>

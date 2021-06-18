@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:o="http://omnifaces/ui">
 	
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
@@ -42,7 +43,7 @@
 <body cz-shortcut-listen="true">
 	<header role="banner" class="cabecalhoPrincipal container">
 		<h1 class="cabecalhoPrincipal-titulo">
-			<a tabindex="1" href="https://www.casadocodigo.com.br/" class="cabecalhoPrincipal-linkTitulo">
+			<a tabindex="1" href="#{request.contextPath}/index.xhtml}" class="cabecalhoPrincipal-linkTitulo">
 				<svg class="logo" role="img" aria-labelledby="altLogo" width="157px" height="55px" viewBox="-181 211.4 207.5 55" preserveAspectRatio="xMinYMid slice">
 	<title id="altLogo">Casa do Código - Livros e Tecnologia</title>
 	<rect class="logo-backgroundSimbolo" x="-181" y="211.4" width="65" height="55"></rect>
@@ -135,7 +136,7 @@
 			<nav role="navigation" aria-label="Categorias de livros" class="colecoesDaCDC">
 				
 					<li class="colecoesDaCDC-colecaoItem">
-						<a href="https://www.casadocodigo.com.br/collections/todos" class="colecoesDaCDC-colecaoLink">
+						<a href="#{request.contextPath}/index.xhtml}" class="colecoesDaCDC-colecaoLink">
 							Todos
 						</a>
 					</li>
@@ -209,47 +210,48 @@
 
 <main>
 		
+<o:cache scope="application">
+	<section class="vitrineDestaquinho container">
+		<h2 class="vitrineDestaquinho-titulo">Last Releases</h2>
+		<ul class="vitrineDestaquinho-lista">
 	
-<section class="vitrineDestaquinho container">
-	<h2 class="vitrineDestaquinho-titulo">Last Releases</h2>
-	<ul class="vitrineDestaquinho-lista">
-
-		<ui:repeat value="#{homeBean.lastReleases()}" var="book">
-			<li class="livroNaVitrine vitrineDestaquinho-produto">
-				<a href="#{request.contextPath}/detalhe-livro.xhtml?id=#{book.id}" class="livroNaVitrine-link"
+			<ui:repeat value="#{homeBean.lastReleases()}" var="book">
+				<li class="livroNaVitrine vitrineDestaquinho-produto">
+					<a href="#{request.contextPath}/detalhe-livro.xhtml?id=#{book.id}" class="livroNaVitrine-link"
+							title="#{book.title}">
+						<div class="livroNaVitrine-imagemContainer" role="presentation">
+							<img class="livroNaVitrine-imagem" 
+								src="#{request.contextPath}/file/#{book.coverPath}" 
+									alt="#{book.title}" title="#{book.title}" />
+						</div>
+						<span class="livroNaVitrine-nome">#{book.title}</span>
+					</a>
+				</li>
+			</ui:repeat>
+		</ul>
+	</section>
+	
+	
+	<h3 class="homeCall container">Todos os nossos livros</h3>
+	
+	<section class="vitrineDaColecao container">
+		<ul class="vitrineDaColecao-lista">
+		
+			<ui:repeat var="book" value="#{homeBean.moreBooks()}">
+				<li class="livroNaVitrine vitrineDaColecao-produto">
+					<a href="#{request.contextPath}/detalhe-livro.xhtml?id=#{book.id}" class="livroNaVitrine-link" 
 						title="#{book.title}">
-					<div class="livroNaVitrine-imagemContainer" role="presentation">
-						<img class="livroNaVitrine-imagem" 
-							src="#{request.contextPath}/file/#{book.coverPath}" 
+						<div class="livroNaVitrine-imagemContainer" role="presentation">
+							<img class="livroNaVitrine-imagem" src="#{request.contextPath}/file/#{book.coverPath}" 
 								alt="#{book.title}" title="#{book.title}" />
-					</div>
-					<span class="livroNaVitrine-nome">#{book.title}</span>
-				</a>
-			</li>
-		</ui:repeat>
-	</ul>
-</section>
-
-
-<h3 class="homeCall container">Todos os nossos livros</h3>
-
-<section class="vitrineDaColecao container">
-	<ul class="vitrineDaColecao-lista">
-	
-		<ui:repeat var="book" value="#{homeBean.moreBooks()}">
-			<li class="livroNaVitrine vitrineDaColecao-produto">
-				<a href="#{request.contextPath}/detalhe-livro.xhtml?id=#{book.id}" class="livroNaVitrine-link" 
-					title="#{book.title}">
-					<div class="livroNaVitrine-imagemContainer" role="presentation">
-						<img class="livroNaVitrine-imagem" src="#{request.contextPath}/file/#{book.coverPath}" 
-							alt="#{book.title}" title="#{book.title}" />
-					</div>
-					<span class="livroNaVitrine-nome">#{book.title}</span>
-				</a>
-			</li>
-		</ui:repeat>
-	</ul>
-</section>
+						</div>
+						<span class="livroNaVitrine-nome">#{book.title}</span>
+					</a>
+				</li>
+			</ui:repeat>
+		</ul>
+	</section>
+</o:cache>
 
 
 		<div class="buscaDoRodape container" role="presentation">
