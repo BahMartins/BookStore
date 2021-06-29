@@ -20,6 +20,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -29,6 +34,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "books")
 @Cacheable
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Book {
 	
 	@Id 
@@ -67,6 +74,8 @@ public class Book {
 	@Size(min = 1, message = "The book needs at least one author!") 
 	@ManyToMany 
 	@Getter @Setter
+	@XmlElementWrapper(name = "authors")
+	@XmlElement(name = "author")
 	private List<Author> authors = new ArrayList<Author>();
 
 	@Override
